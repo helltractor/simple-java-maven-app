@@ -6,6 +6,12 @@ pipeline {
         }
     }
     stages {
+        stage('Initialize') {
+            steps {
+                def dockerHome = tool 'docker-1'
+                env.Path = "${dockerHome}/bin:${env.PATH}"
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
